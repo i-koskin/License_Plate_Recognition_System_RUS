@@ -14,8 +14,8 @@
 
 ### 📸 Примеры работы
 
-<img src="./docs/2025-06-30_12-17-50_truck%20%5BE726KE156%5D.jpg" width="600">
-<img src="./docs/2025-06-30_12-19-09_truck%20%5BX653TA750%5D.jpg" width="600">
+<img src="./docs/2025-06-30_12-17-50_truck%20%5BE726KE156%5D.jpg" width="900">
+<img src="./docs/2025-06-30_12-19-09_truck%20%5BX653TA750%5D.jpg" width="900">
 
 
 ## ⚙️ Установка
