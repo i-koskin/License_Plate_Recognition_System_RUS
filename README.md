@@ -41,8 +41,9 @@ pip install -r requirements.txt
 ```bash
 uvicorn web_interface:app --reload --port 8000
 ```
+<p align="center">
 <img src="./docs/web_interface.JPG" width="500">
-
+</p>
 
 ### 🚀 Запуск
 
