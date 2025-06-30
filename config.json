@@ -1,0 +1,8 @@
+{
+  "video_source": "C:\\Users\\user\\Downloads\\Car_Detector\\test\\cvtest.avi",
+  "frame_skip": 3,
+  "save_video": true,
+  "recording_interval_minutes": 10,
+  "save_full_frame": true,
+  "log_level": "INFO"
+}

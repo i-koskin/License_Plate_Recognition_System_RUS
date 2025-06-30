@@ -1,0 +1,25 @@
+# YOLOv8
+ultralytics==8.0.239
+
+# Обработка изображений
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch==2.0.1
+torchvision==0.15.2
+torchaudio==2.0.2
+opencv-python==4.10.0.84
+numpy==1.26.4
+
+# Распознавание текстов из изображений
+paddleocr==2.10.0
+paddlepaddle==3.0.0
+
+# Веб-интерфейс
+fastapi==0.115.5
+uvicorn==0.34.0
+python-multipart==0.0.20
+
+# Парсинг и конфиг
+python-dotenv==1.0.1
+
+# Утилиты
+colorlog==6.9.0 # Для цветных логов
