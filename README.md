@@ -51,3 +51,6 @@ uvicorn web_interface:app --reload --port 8000
 python main.py
 ```
 
+### 🛑 Остановка
+
+Остановка по клавишам "q" или "Esc"
