@@ -159,7 +159,7 @@ def main():
     cap.release()
     video_writer.release()
     cv2.destroyAllWindows()
-    logging.info("🛑 Захват остановлен. Файлы закрыты")
+    logging.info("🛑 Захват остановлен")
 
 
 if __name__ == "__main__":
