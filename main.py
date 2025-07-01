@@ -63,7 +63,7 @@ def main():
     is_file_source = isinstance(
         video_source, str) and video_source.lower().endswith((".avi", ".mp4", ".mkv"))
 
-    # === Инициализация записи видео ===
+    # Инициализация записи видео
     if save_video:
         ret, frame = cap.read()
         if not ret:
@@ -130,7 +130,7 @@ def main():
                 2
             )
 
-        # === Добавление даты и времени ===
+        # Добавление даты и времени
         now = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
         text_size, _ = cv2.getTextSize(now, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2)
         text_w, text_h = text_size
@@ -141,10 +141,10 @@ def main():
                     0.7, (255, 255, 255), 2, cv2.LINE_AA)
 
         if save_video:
-            # === Запись обработанного кадра ===
+            # Запись обработанного кадра
             video_writer.write(frame)
 
-            # === Перезапуск записи по времени ===
+            # Перезапуск записи по времени
             if time.time() - start_record_time > recording_interval_seconds:
                 video_writer.release()
                 video_writer = create_video_writer(frame.shape, source_label)
@@ -163,10 +163,17 @@ def main():
 
 
 if __name__ == "__main__":
+    is_file_source = isinstance(
+        video_source, str) and video_source.lower().endswith((".avi", ".mp4", ".mkv"))
+
     while True:
         try:
             main()
-            logging.info("Система запущена")
+            if is_file_source:
+                logging.info("✅ Обработка видеофайла завершена")
+                break
+            else:
+                logging.info("♻️ Перезапуск потока...")
         except KeyboardInterrupt:
             logging.info("Завершение по Ctrl+C")
             break
