@@ -47,8 +47,8 @@ def main():
     detector = ObjectDetector(MODEL_PATH)
     plate_reader = PlateRecognizer()
 
-    cv2.namedWindow("YOLOv8 Detection", cv2.WND_PROP_FULLSCREEN)
-    cv2.setWindowProperty("YOLOv8 Detection",
+    cv2.namedWindow("Car Detection", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("Car Detection",
                           cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     logging.info("Система запущена")
@@ -150,7 +150,7 @@ def main():
                 video_writer = create_video_writer(frame.shape, source_label)
                 start_record_time = time.time()
 
-        cv2.imshow("YOLOv8 Detection", frame)
+        cv2.imshow("Car Detection", frame)
         key = cv2.waitKey(1) & 0xFF
         if key in [ord('q'), 27]:  # Остановка по клавишам "q" или "Esc"
             logging.info("🛠 Принудительная остановка пользователем")
