@@ -6,39 +6,33 @@
 """
 
 import os
-from dotenv import load_dotenv
-
-# Загружаем переменные окружения из .env файла
-load_dotenv()
 
 # Путь к конфигурационному файлу
 CONFIG_PATH = "config.json"
 
 # Путь к .pt модели YOLO
-MODEL_PATH = "yolo_weights/yolov8s.pt"
+VEHICLE_MODEL_PATH = "yolo_weights/yolov8s.pt"
+PLATE_MODEL_PATH = "yolo_weights/yolov8_plate.pt"
+
+# Путь к шрифтам (кириллица)
+FONT_PATH = "fonts/AutoNumber_Regular.ttf"
 
 # RTSP URL для подключения к IP-камере
 RTSP_URL: str | None = os.getenv("RTSP_URL")
 
 # Целевые классы объектов, распознаваемых моделью
-TARGET_CLASSES: list[str] = [
-    'car',
-    'motorcycle',
-    'bus',
-    'truck'
-]
-
-# Фиксированная палитра для классов (BGR)
-CLASS_COLOR_PALETTE = {
-    "car":           (0, 255, 0),       # Зеленый
-    'motorcycle':    (255, 0, 255),     # Розовый
-    "bus":           (0, 255, 255),     # Желтый
-    "truck":         (0, 0, 255),       # Красный
+TARGET_CLASSES: dict[int, str] = {
+    2: 'car',
+    5: 'bus',
+    7: 'truck'
 }
 
-# Классы, по которым может происходить распознавание номеров
-LICENSE_PLATE_KEYWORDS: list[str] = [
-    'car', 'motorcycle', 'bus', 'truck']
+SAVE_DIR = "results"
 
-# Минимальный порог уверенности для отбора объектов
-CONFIDENCE_THRESHOLD = 0.5
+CONFIDENCE_THRESHOLD = 0.4
+
+PLATE_LOG_INTERVAL = 60  # сек - повторно сохранить номер
+
+PLATE_HOLD_TIME = 2.0  # сек – сохранить номер за SID, если он не менялся
+
+SID_TTL = 3.0  # сек - SID «живёт» без bbox‑а

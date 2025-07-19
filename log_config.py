@@ -5,11 +5,15 @@ from logging.handlers import RotatingFileHandler
 from datetime import datetime
 from colorlog import ColoredFormatter
 
-from config import CONFIG_PATH
+from config import CONFIG_PATH, SAVE_DIR
+
 
 LOG_DIR = "logs"
 LOG_FILE = os.path.join(LOG_DIR, f"{datetime.now():%Y-%m-%d}_log.log")
-IMAGE_DIR = os.path.join(LOG_DIR, "images")
+
+os.makedirs(f"{SAVE_DIR}/images", exist_ok=True)
+
+IMAGE_DIR = os.path.join(SAVE_DIR, "images")
 
 # Форматы логов
 COLOR_FORMAT = "%(log_color)s[%(asctime)s] [%(levelname)s] %(message)s"
@@ -31,7 +35,7 @@ def load_log_level() -> int:
 def setup_logging():
     """Настройка логирования с цветной консолью и ротацией файлов"""
     os.makedirs(LOG_DIR, exist_ok=True)
-    os.makedirs(IMAGE_DIR, exist_ok=True)
+    # os.makedirs(IMAGE_DIR, exist_ok=True)
 
     log_level = load_log_level()
     logger = logging.getLogger()

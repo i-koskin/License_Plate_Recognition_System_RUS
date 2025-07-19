@@ -4,6 +4,7 @@ import numpy as np
 import logging
 from typing import Optional
 from datetime import datetime
+
 from log_config import get_image_log_dir
 
 logger = logging.getLogger(__name__)

@@ -1,8 +1,8 @@
 {
-  "video_source": "C:\\Users\\user\\Downloads\\Car_Detector\\test\\cvtest.avi",
-  "frame_skip": 3,
+  "video_source": "C:\\Users\\user\\Downloads\\License_Plate_Recognition_System_RUS\\test\\cvtest.avi",
+  "frame_skip": 1,
   "save_video": true,
-  "recording_interval_minutes": 10,
+  "recording_interval_minutes": 60,
   "save_full_frame": true,
   "log_level": "INFO"
 }
