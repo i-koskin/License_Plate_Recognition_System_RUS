@@ -35,9 +35,9 @@ python -m venv venv
 venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
-Предобученную модель для распознавания номерных знаков автомобилей скачайте по ссылке и разместите в папке yolo_weights/ :
+Предобученную модель для распознавания номерных знаков автомобилей скачайте по ссылке и разместите в папке **yolo_weights/** :
 ```bash
-https://drive.google.com/file/d/1HBKeEvNWWI7z0ENeYYQwI9BqdmfFj2HS/view?usp=drive_link
+https://drive.google.com/file/d/1HBKeEvNWWI7z0ENeYYQwI9BqdmfFj2HS
 ```
 * Модель yolov8_plate.pt дообучена на распознавание ГРЗ автомобилей на 3000+ изображениях.
 
