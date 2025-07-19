@@ -56,9 +56,14 @@ def main():
     plate_reader = PlateRecognizer()
     tracker = ByteTrack()
 
+<<<<<<< HEAD
     cv2.namedWindow("License Plate Recognition System RUS",
                     cv2.WND_PROP_FULLSCREEN)
     cv2.setWindowProperty("License Plate Recognition System RUS",
+=======
+    cv2.namedWindow("Car Detection", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("Car Detection",
+>>>>>>> ce299e59b6de8b5884a279ad069658edb41a8aa2
                           cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     logging.info("Система запущена")
@@ -73,10 +78,13 @@ def main():
     is_file_source = isinstance(
         video_source, str) and video_source.lower().endswith((".avi", ".mp4", ".mkv"))
 
+<<<<<<< HEAD
     current_time = time.time()
     timestamp = int(time.time())
     log_ts = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
 
+=======
+>>>>>>> ce299e59b6de8b5884a279ad069658edb41a8aa2
     # Инициализация записи видео
     if save_video:
         ret, frame = cap.read()
@@ -141,6 +149,7 @@ def main():
                 if plate_text:
                     last_plate = plate_by_sid.get(assigned_sid)
 
+<<<<<<< HEAD
                     if plate_text != last_plate:
                         plate_by_sid[assigned_sid] = plate_text
                         sid_last_plate_time[assigned_sid] = current_time
@@ -175,16 +184,34 @@ def main():
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 255), 2)
 
             log_detection(frame, last_plate, bbox, save_full_frame)
+=======
+        # Добавление даты и времени
+        now = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+        text_size, _ = cv2.getTextSize(now, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2)
+        text_w, text_h = text_size
+        x = frame.shape[1] - text_w - 15
+        y = frame.shape[0] - 10
+        cv2.putText(frame, now, (x, y),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7, (255, 255, 255), 2, cv2.LINE_AA)
+>>>>>>> ce299e59b6de8b5884a279ad069658edb41a8aa2
 
         if save_video:
             # Запись обработанного кадра
             video_writer.write(frame)
+<<<<<<< HEAD
             # Перезапуск записи по времени
             if current_time - start_record_time > recording_interval_seconds:
+=======
+
+            # Перезапуск записи по времени
+            if time.time() - start_record_time > recording_interval_seconds:
+>>>>>>> ce299e59b6de8b5884a279ad069658edb41a8aa2
                 video_writer.release()
                 video_writer = create_video_writer(frame.shape, source_label)
                 start_record_time = time.time()
 
+<<<<<<< HEAD
         # Удаление устаревших SID
         expired_sids = [sid for sid, last_seen in sid_last_seen.items()
                         if current_time - last_seen > SID_TTL]
@@ -198,6 +225,9 @@ def main():
                 del plate_by_sid[sid]
 
         cv2.imshow("License Plate Recognition System RUS", frame)
+=======
+        cv2.imshow("Car Detection", frame)
+>>>>>>> ce299e59b6de8b5884a279ad069658edb41a8aa2
         key = cv2.waitKey(1) & 0xFF
         if key in [ord('q'), 27]:  # Остановка по клавишам "q" или "Esc"
             logger.info("🛠 Принудительная остановка пользователем")
@@ -209,11 +239,18 @@ def main():
     cap.release()
     video_writer.release()
     cv2.destroyAllWindows()
+<<<<<<< HEAD
     logger.info("🛑 Захват остановлен. Окна закрыты")
 
 
 if __name__ == "__main__":
 
+=======
+    logging.info("🛑 Захват остановлен")
+
+
+if __name__ == "__main__":
+>>>>>>> ce299e59b6de8b5884a279ad069658edb41a8aa2
     is_file_source = isinstance(
         video_source, str) and video_source.lower().endswith((".avi", ".mp4", ".mkv"))
 
@@ -221,10 +258,17 @@ if __name__ == "__main__":
         try:
             main()
             if is_file_source:
+<<<<<<< HEAD
                 logger.info("✅ Обработка видеофайла завершена")
                 break
             else:
                 logger.info("♻️ Перезапуск потока...")
+=======
+                logging.info("✅ Обработка видеофайла завершена")
+                break
+            else:
+                logging.info("♻️ Перезапуск потока...")
+>>>>>>> ce299e59b6de8b5884a279ad069658edb41a8aa2
         except KeyboardInterrupt:
             logger.info("Завершение по Ctrl+C")
             break

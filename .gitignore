@@ -7,7 +7,11 @@ venv/
 
 # Logs and media
 logs/
+<<<<<<< HEAD
 results/
+=======
+recordings/
+>>>>>>> ce299e59b6de8b5884a279ad069658edb41a8aa2
 
 # Model files
 yolo_weights/
