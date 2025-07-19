@@ -2,12 +2,8 @@ import cv2
 from pathlib import Path
 from datetime import datetime
 from typing import Tuple
-<<<<<<< HEAD
 
 from config import SAVE_DIR
-=======
->>>>>>> ce299e59b6de8b5884a279ad069658edb41a8aa2
-
 
 def create_video_writer(
     frame_shape: Tuple[int, int],
@@ -42,14 +38,8 @@ def create_video_writer(
     filename = f"{now}_{source_label}{ext}"
 
     # Создание папки и объекта VideoWriter
-<<<<<<< HEAD
+
     output_path = Path(SAVE_DIR)
     output_path.mkdir(exist_ok=True)
 
     return cv2.VideoWriter(str(output_path/filename), fourcc, fps, (w, h))
-=======
-    output_path = Path("recordings")
-    output_path.mkdir(exist_ok=True)
-
-    return cv2.VideoWriter(str(output_path / filename), fourcc, fps, (w, h))
->>>>>>> ce299e59b6de8b5884a279ad069658edb41a8aa2
