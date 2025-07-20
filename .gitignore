@@ -9,8 +9,5 @@ venv/
 logs/
 results/
 
-# Model files
-yolo_weights/
-
 # Test files
 test/
