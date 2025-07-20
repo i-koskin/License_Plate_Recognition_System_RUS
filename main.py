@@ -27,7 +27,6 @@ save_video = cfg.get("save_video", False)
 recording_interval_minutes = max(
     int(cfg.get("recording_interval_minutes", 60)), 1)
 recording_interval_seconds = recording_interval_minutes * 60
-save_full_frame = cfg.get("save_full_frame", False)
 frame_skip = cfg.get("frame_skip", 5)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 video_source = cfg.get("video_source", "0")
@@ -59,6 +58,7 @@ def main():
     cv2.namedWindow("License Plate Recognition System RUS",
                     cv2.WND_PROP_FULLSCREEN)
     cv2.setWindowProperty("License Plate Recognition System RUS",
+                          cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     logging.info("Система запущена")
 
@@ -172,7 +172,7 @@ def main():
             cv2.putText(frame, f"SID {sid}", (vx1, vy1 - 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 255), 2)
 
-            log_detection(frame, last_plate, bbox, save_full_frame)
+            log_detection(frame, last_plate, bbox)
 
         # Добавление даты и времени
         now = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
@@ -183,7 +183,6 @@ def main():
         cv2.putText(frame, now, (x, y),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.7, (255, 255, 255), 2, cv2.LINE_AA)
-
 
         if save_video:
             # Запись обработанного кадра
@@ -221,12 +220,6 @@ def main():
     video_writer.release()
     cv2.destroyAllWindows()
     logger.info("🛑 Захват остановлен. Окна закрыты")
-
-
-if __name__ == "__main__":
-
-=======
-    logging.info("🛑 Захват остановлен")
 
 
 if __name__ == "__main__":

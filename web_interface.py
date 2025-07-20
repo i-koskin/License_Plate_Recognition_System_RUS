@@ -24,15 +24,14 @@ def load_config():
             "video_source": "0",
             "frame_skip": 5,
             "save_video": True,
-            "recording_interval_minutes": 10,
-            "save_full_frame": True,
+            "recording_interval_minutes": 60,
             "log_level": "INFO"
         }
     with open(CONFIG_PATH, "r") as f:
         return json.load(f)
 
 
-def save_config(video_source, frame_skip, save_video, recording_interval_minutes, save_full_frame, log_level):
+def save_config(video_source, frame_skip, save_video, recording_interval_minutes, log_level):
     """
     Сохраняет настройки в конфигурационный файл config.json.
 
@@ -41,8 +40,7 @@ def save_config(video_source, frame_skip, save_video, recording_interval_minutes
     - выбор источника видеосигнала;
     - количество кадров, которые будут пропускаться (для ускорения работы системы);
     - флаг для сохранения видео;
-    - интервал записи в минутах;
-    - флаг для сохранения полного кадра;
+    - продолжительность записи обработанного видео в минутах;
     - уровень логирования.
 
     Args:
@@ -52,8 +50,7 @@ def save_config(video_source, frame_skip, save_video, recording_interval_minutes
                             - указать rtsp://... для IP-камеры.
         frame_skip (int): количество кадров, которые будут пропускаться;
         save_video (bool): сохранять видео;
-        recording_interval_minutes (int): интервал записи в минутах;
-        save_full_frame (bool): сохранять полный кадр или только ROI;
+        recording_interval_minutes (int): продолжительность записи обработанного видео в минутах;
         log_level (str): выбор уровеня логирования ("INFO", "WARNING", "ERROR", "DEBUG").
 
     """
@@ -64,7 +61,6 @@ def save_config(video_source, frame_skip, save_video, recording_interval_minutes
             "frame_skip": frame_skip,
             "save_video": save_video,
             "recording_interval_minutes": recording_interval_minutes,
-            "save_full_frame": save_full_frame,
             "log_level": log_level
         }, f, indent=2, ensure_ascii=False)
 
@@ -77,8 +73,7 @@ def read_form():
     Эта функция генерирует HTML-страницу, на которой пользователи могут настроить:
     - выбор источника видеосигнала (видеокамера, видеофайл);
     - количество кадров, которые будут пропускаться;
-    - время записи в минутах;
-    - сохранение полного кадра или только ROI;
+    - продолжительность записи обработанного видео в минутах;
     - уровень логирования.
 
     Returns:
@@ -92,9 +87,7 @@ def read_form():
     # Определяем состояние чекбокса для сохранения видео
     video_checked = "checked" if cfg.get("save_video", False) else ""
     # Определяем время записи в минутах
-    recording_interval_minutes = cfg.get("recording_interval_minutes", 10)
-    # Определяем состояние чекбокса для сохранения кадра или ROI
-    frame_checked = "checked" if cfg.get("save_full_frame", False) else ""
+    recording_interval_minutes = cfg.get("recording_interval_minutes", 60)
     # Получаем текущий уровень логирования
     log_level = cfg.get("log_level", "INFO")
 
@@ -143,11 +136,6 @@ def read_form():
       <label>Время записи (в минутах):</label>
       <input type="number" name="recording_interval_minutes" value="{recording_interval_minutes}" min="1" max="60"><br><br>
 
-      <label>
-        <input type="checkbox" name="save_full_frame" {frame_checked}>
-        Сохранять полный кадр (а не только ROI)
-      </label><br><br>
-
       <label>Уровень логирования:</label>
       <select name="log_level">
         <option value="INFO" {'selected' if log_level == 'INFO' else ''}>INFO</option>
@@ -170,7 +158,6 @@ def update_config(
     frame_skip: int = Form(...),
     save_video: str = Form(None),
     recording_interval_minutes: int = Form(...),
-    save_full_frame: str = Form(None),
     log_level: str = Form(...)
 ):
     """
@@ -182,7 +169,6 @@ def update_config(
     Args:
         video_source (str): сторка, указывающая источник видеосигнала;
         frame_skip (int): количество кадров, которые будут пропускаться;
-        save_full_frame (str): строка, указывающая, сохранять ли полный кадр;
         log_level (str): уровень логирования, выбранный пользователем.
 
     Returns:
@@ -190,9 +176,9 @@ def update_config(
     """
     # Преобразуем строки в логические значения
     save_video_flag = save_video is not None
-    save_full_flag = save_full_frame is not None
     # Сохраняем новые настройки
-    save_config(video_source, frame_skip, save_video_flag, recording_interval_minutes,
-                save_full_flag, log_level)
+    save_config(video_source, frame_skip, save_video_flag,
+                recording_interval_minutes, log_level)
     # Перенаправляем пользователя на страницу настроек
+
     return RedirectResponse("/", status_code=303)

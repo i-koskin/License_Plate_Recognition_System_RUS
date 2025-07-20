@@ -3,6 +3,5 @@
   "frame_skip": 1,
   "save_video": true,
   "recording_interval_minutes": 60,
-  "save_full_frame": true,
   "log_level": "INFO"
 }
