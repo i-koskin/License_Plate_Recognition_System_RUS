@@ -11,8 +11,8 @@ import os
 CONFIG_PATH = "config.json"
 
 # Путь к .pt модели YOLO
-VEHICLE_MODEL_PATH = "yolo_weights/yolov8s.pt"
-PLATE_MODEL_PATH = "yolo_weights/yolov8_plate.pt"
+VEHICLE_MODEL_PATH = "yolov8s.pt"
+PLATE_MODEL_PATH = "yolov8_plate.pt"
 
 # Путь к шрифтам (кириллица)
 FONT_PATH = "fonts/AutoNumber_Regular.ttf"
