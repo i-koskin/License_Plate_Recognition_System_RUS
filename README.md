@@ -33,7 +33,7 @@
 ```bash
 git clone https://github.com/i-koskin/License_Plate_Recognition_System_RUS.git
 cd License_Plate_Recognition_System_RUS
-python -m venv venv
+py -m venv venv
 venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
