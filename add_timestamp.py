@@ -20,8 +20,8 @@ def add_timestamp(frame, fmt="%d.%m.%Y %H:%M:%S"):
         timestamp_text, font, font_scale, thickness)
 
     # позиция правый‑нижний угол (немного отступаем)
-    x = frame.shape[1] - text_w - 15        # 12 px справа
-    y = frame.shape[0] - 10             # 12 px снизу
+    x = frame.shape[1] - text_w - 15        # 15 px справа
+    y = frame.shape[0] - 10             # 10 px снизу
 
     # рисуем текст
     cv2.putText(frame, timestamp_text, (x, y),
