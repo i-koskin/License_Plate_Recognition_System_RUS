@@ -173,17 +173,7 @@ def main():
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 255), 2)
 
             log_detection(frame, last_plate)
-
-        # Добавление даты и времени
-        now = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
-        text_size, _ = cv2.getTextSize(now, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2)
-        text_w, text_h = text_size
-        x = frame.shape[1] - text_w - 15
-        y = frame.shape[0] - 10
-        cv2.putText(frame, now, (x, y),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.7, (255, 255, 255), 2, cv2.LINE_AA)
-
+       
         if save_video:
             # Запись обработанного кадра
             video_writer.write(frame)
