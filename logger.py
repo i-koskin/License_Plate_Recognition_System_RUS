@@ -12,17 +12,15 @@ logger = logging.getLogger(__name__)
 
 def log_detection(
     frame: np.ndarray,
-    object_type: str,
-    roi: Optional[np.ndarray] = None
+    object_type: str
 ) -> str:
     """
-    Сохраняет кадр/ROI и логгирует событие.
+    Сохраняет кадр и логгирует событие.
 
     Args:
         frame (np.ndarray): Полный кадр с камеры.
         object_type (str): Тип обнаруженного объекта.
-        roi (Optional[np.ndarray]): Область интереса (если есть).
-
+        
     Returns:
         str: Путь к сохраненному изображению.
     """
