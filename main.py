@@ -172,7 +172,7 @@ def main():
             cv2.putText(frame, f"SID {sid}", (vx1, vy1 - 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 255), 2)
 
-            log_detection(frame, last_plate, bbox)
+            log_detection(frame, last_plate)
 
         # Добавление даты и времени
         now = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
