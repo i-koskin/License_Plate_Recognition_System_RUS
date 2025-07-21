@@ -72,7 +72,7 @@ pip install -r requirements.txt
 ```bash
 uvicorn web_interface:app --reload --port 8000
 ```
-⚠️ **Укажите путь к источнику обрабатываемого видео!**
+⚠️ **Укажите путь к источнику обрабатываемого видео!** 👇
 
 <p align="center">
 <img src="./assets/web_interface.JPG" width="500">
