@@ -16,8 +16,9 @@ from video_writer import create_video_writer
 from add_timestamp import add_timestamp
 from license_plate_recognizer import PlateRecognizer
 from plate_assignment import assign_plates_to_vehicles
+from save_recognized_plate import save_recognized_plate
 
-from config import VEHICLE_MODEL_PATH, PLATE_MODEL_PATH, SAVE_DIR, TARGET_CLASSES, PLATE_LOG_INTERVAL, PLATE_HOLD_TIME, SID_TTL
+from config import VEHICLE_MODEL_PATH, PLATE_MODEL_PATH, TARGET_CLASSES, CONFIDENCE_THRESHOLD, PLATE_LOG_INTERVAL, PLATE_HOLD_TIME, SID_TTL
 
 # ---------------- CONFIG ----------------
 with open("config.json", "r", encoding="utf-8") as f:
@@ -39,7 +40,6 @@ sid_last_seen = {}
 plate_by_sid = defaultdict(lambda: "")
 plate_to_sid = {}
 sid_last_plate_time = defaultdict(lambda: 0)
-recognized_plates = []
 plate_last_log = defaultdict(lambda: 0)  # {plate_number: timestamp}
 
 
@@ -128,7 +128,11 @@ def main():
             plate_boxes, plate_texts, tracks)
 
         for track in tracks:
-            bbox, sid = track[0], int(track[4])
+            bbox, conf, sid = track[0], track[2], int(track[4])
+
+            if conf < CONFIDENCE_THRESHOLD:
+                continue
+                
             vx1, vy1, vx2, vy2 = map(int, bbox.tolist())
 
             stable_boxes[sid] = bbox
@@ -137,6 +141,8 @@ def main():
             plate_text = ""
 
             for assigned_sid, plate_text in plate_assignments.items():
+                # Сохраняем распознанные номера в Excel
+                save_recognized_plate(plate_text, assigned_sid, video_source)
                 if plate_text:
                     last_plate = plate_by_sid.get(assigned_sid)
                     if plate_text != last_plate:
@@ -146,11 +152,6 @@ def main():
                         if timestamp - last_time >= PLATE_LOG_INTERVAL:
                             # обновить время записи
                             plate_last_log[plate_text] = timestamp
-
-                            recognized_plates.append({
-                                "timestamp": log_ts,
-                                "plate": plate_text
-                            })
 
                 elif assigned_sid in plate_by_sid:
                     # проверка: если номер старый, и SID не менялся долго → сохранить
@@ -202,9 +203,6 @@ def main():
         if key in [ord('q'), 27]:  # Остановка по клавишам "q" или "Esc"
             logger.info("🛠 Принудительная остановка пользователем")
             break
-
-    df = pd.DataFrame(recognized_plates)
-    df.to_excel(f"{SAVE_DIR}/recognized_plates.xlsx", index=False)
 
     cap.release()
     video_writer.release()
