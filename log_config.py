@@ -5,15 +5,11 @@ from logging.handlers import RotatingFileHandler
 from datetime import datetime
 from colorlog import ColoredFormatter
 
-from config import CONFIG_PATH, SAVE_DIR
+from config import CONFIG_PATH
 
 
 LOG_DIR = "logs"
 LOG_FILE = os.path.join(LOG_DIR, f"{datetime.now():%Y-%m-%d}_log.log")
-
-os.makedirs(f"{SAVE_DIR}/images", exist_ok=True)
-
-IMAGE_DIR = os.path.join(SAVE_DIR, "images")
 
 # Форматы логов
 COLOR_FORMAT = "%(log_color)s[%(asctime)s] [%(levelname)s] %(message)s"
@@ -60,8 +56,3 @@ def setup_logging():
 
     logger.debug("✅ Логирование настроено на уровне %s",
                  logging.getLevelName(log_level))
-
-
-def get_image_log_dir() -> str:
-    """Возвращает путь к директории изображений логов"""
-    return IMAGE_DIR
