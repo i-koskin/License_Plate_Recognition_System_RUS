@@ -4,7 +4,7 @@ import numpy as np
 import logging
 from datetime import datetime
 
-from log_config import get_image_log_dir
+from config import SAVE_DIR
 
 logger = logging.getLogger(__name__)
 
