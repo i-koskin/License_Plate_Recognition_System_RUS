@@ -2,7 +2,6 @@ import os
 import cv2
 import numpy as np
 import logging
-from typing import Optional
 from datetime import datetime
 
 from log_config import get_image_log_dir
@@ -24,11 +23,14 @@ def log_detection(
     Returns:
         str: Путь к сохраненному изображению.
     """
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    filename = f"{timestamp}_{object_type}.jpg"
-    image_path = os.path.join(get_image_log_dir(), filename)
+    current_date_str = datetime.now().strftime("%Y-%m-%d")
+    date_dir = Path(f"{SAVE_DIR}/recognized/{current_date_str}")
+    os.makedirs(date_dir, exist_ok=True)
 
-    cv2.imwrite(image_path, frame)
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    image_path = date_dir/f"{timestamp}_{object_type}.jpg"
+
+    cv2.imwrite(str(image_path), frame)
 
     logger.info(f"Обнаружен объект: {object_type} | Сохранено: {image_path}")
-    return filename
+    return image_path
