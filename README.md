@@ -85,7 +85,7 @@ uvicorn web_interface:app --reload --port 8000
 Ссылка для скачивания с Google Диск:
 
 ```bash
-https://drive.google.com/file/d/1LMxP8ozMcfHuM7gjtIEKbsqq7pnBM6
+https://drive.google.com/file/d/1LMxP8ozMcfHuM7gjtIEKbsqq7pnBM6_t
 ```
 
 ## 🚀 Запуск
