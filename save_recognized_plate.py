@@ -27,7 +27,7 @@ def save_recognized_plate(plate_text: str, sid: int, source_label: str) -> None:
     last_logged = plate_log_times.get(plate_text, 0)
 
     if now - last_logged < PLATE_LOG_INTERVAL:
-        logger.info(f"[SKIP] Номер '{plate_text}' уже записан недавно.")
+        logger.info(f"[SKIP] Номер '{plate_text}' записан менее {PLATE_LOG_INTERVAL} секунд назад.")
         return
 
     plate_log_times[plate_text] = now
