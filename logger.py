@@ -25,7 +25,7 @@ def log_detection(
         str: Путь к сохраненному изображению.
     """
     current_date_str = datetime.now().strftime("%Y-%m-%d")
-    date_dir = Path(f"{SAVE_DIR}/recognized/{current_date_str}")
+    date_dir = Path(f"{SAVE_DIR}/images/{current_date_str}")
     os.makedirs(date_dir, exist_ok=True)
 
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
